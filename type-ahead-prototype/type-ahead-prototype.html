@@ -15,17 +15,35 @@
     </ul>
   </form>
 <script>
+
+// Fetch our location data from external source
 const endpoint = 'https://gist.githubusercontent.com/notwaving/1bfd4f20a54fccba52a51b711c3e0d7c/raw/91644ca3df50a094d0262ac06c7c49a38837b1e5/UK-weather-locations.json';
-// Put places into an empty array
-const places = [];
+// Create an empty array
+const locations = [];
 
 fetch(endpoint)
-// Grab JSON data
+// Convert raw data into JSON
   .then(blob => blob.json())
+  .then(data => console.log(data));
   // Get this data into places array by spreading into a push method
-  .then(data => places.push(...data))
   
-  // Filter array into listenable subset
+  
+
+// Creates variables for the search box and the drop down suggestions, as specified in the <form>
+// const searchInput = document.querySelector('.search')
+// const suggestions = document.querySelector('.suggestions')
+
+// 'change' works when you click outside the search box
+// 'keyup' works after every key press
+// searchInput.addEventListener('change', displayMatches);
+// searchInput.addEventListener('keyup', displayMatches);
+
+
+</script>
+</body>
+</html>
+
+<!-- // Filter array into listenable subset
 function findMatches(wordToMatch, places) {
   return places.filter(place => {
     // Figure out if city or state matches what was searched, using Regex. 
@@ -52,18 +70,4 @@ function displayMatches(){
     `;
   }).join('');
   suggestions.innerHTML = html;
-}
-
-// Creates variables for the search box and the drop down suggestions, as specified in the <form>
-// const searchInput = document.querySelector('.search')
-// const suggestions = document.querySelector('.suggestions')
-
-// 'change' works when you click outside the search box
-// 'keyup' works after every key press
-// searchInput.addEventListener('change', displayMatches);
-// searchInput.addEventListener('keyup', displayMatches);
-
-
-</script>
-</body>
-</html>
+} -->
