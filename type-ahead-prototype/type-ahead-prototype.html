@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Type Ahead 👀</title>
+  <title>Type Ahead Prototype</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <form class="search-form">
-    <input type="text" class="search" placeholder="City or State">
+    <input type="text" class="search" placeholder="Place or Region">
     <ul class="suggestions">
       <li>Filter for a place</li>
       <li>or a region</li>
@@ -17,57 +17,20 @@
 <script>
 
 // Fetch our location data from external source
-const endpoint = 'https://gist.githubusercontent.com/notwaving/1bfd4f20a54fccba52a51b711c3e0d7c/raw/91644ca3df50a094d0262ac06c7c49a38837b1e5/UK-weather-locations.json';
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+// const endpoint = 'https://gist.githubusercontent.com/notwaving/1bfd4f20a54fccba52a51b711c3e0d7c/raw/d503811161a4ebefa869cd4ef75a1d3445005243/locations.json';
+
 // Create an empty array
 const locations = [];
 
 fetch(endpoint)
 // Convert raw data into JSON
   .then(blob => blob.json())
-  .then(data => console.log(data));
-  // Get this data into places array by spreading into a push method
-  
-  
-
-// Creates variables for the search box and the drop down suggestions, as specified in the <form>
-// const searchInput = document.querySelector('.search')
-// const suggestions = document.querySelector('.suggestions')
-
-// 'change' works when you click outside the search box
-// 'keyup' works after every key press
-// searchInput.addEventListener('change', displayMatches);
-// searchInput.addEventListener('keyup', displayMatches);
+  // Use spread operator to push JSON data into locations array
+  .then(data => locations.push(...data));
 
 
 </script>
 </body>
 </html>
 
-<!-- // Filter array into listenable subset
-function findMatches(wordToMatch, places) {
-  return places.filter(place => {
-    // Figure out if city or state matches what was searched, using Regex. 
-    //'g' = global (it will look through the entire string); 'i' = insensitive (it will match lower as well as uppercase)
-    const regex = new RegExp(wordToMatch, 'gi'); 
-    // Return if search string matches city OR state
-    return place.city.match(regex) || place.state.match(regex)
-  });
-}
-
-// Called every time the user changes the value in the search box
-function displayMatches(){
-  const matchArray = findMatches(this.value, places);
-  const html = matchArray.map(place => {
-    // Highlight user query in return values
-    const regex = new RegExp(this.value, 'gi');
-    const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`)
-    const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`)
-    return `
-      <li>
-        <span class="name">${cityName}, ${stateName}</span>
-        <span class="population">${place.population}</span>
-      </li>
-    `;
-  }).join('');
-  suggestions.innerHTML = html;
-} -->
