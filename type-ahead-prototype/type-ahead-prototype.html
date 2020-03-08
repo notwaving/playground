@@ -17,18 +17,41 @@
 <script>
 
 // Fetch our location data from external source
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
-// const endpoint = 'https://gist.githubusercontent.com/notwaving/1bfd4f20a54fccba52a51b711c3e0d7c/raw/d503811161a4ebefa869cd4ef75a1d3445005243/locations.json';
-
+const endpoint = 'https://gist.githubusercontent.com/notwaving/1bfd4f20a54fccba52a51b711c3e0d7c/raw/73af5a2070cedb4c45edc3a3bf63c94e4ad4ddf4/locations.json';
 // Create an empty array
-const locations = [];
+let locations = [];
+
+// Filter the array into a subset
 
 fetch(endpoint)
 // Convert raw data into JSON
   .then(blob => blob.json())
   // Use spread operator to push JSON data into locations array
-  .then(data => locations.push(...data));
+  .then(data => locations = [...locations, ...data]);
+  
+  function findMatches(wordToMatch, locations){
+  return locations.filter(place => {
+    // Here, we need to work out if name or unitaryAuthArea matches what was searched
+    // Regex expression: 
+    // g = global (checking the entire string for that specific word); 
+    //'i' = insensitive (matching lowercase && uppercase)
+    const regex = new RegExp(wordToMatch, 'gi');
+    // Return if name OR unitaryAuthArea is true,
+    return place.name.match(regex) || place.unitaryAuthArea.match(regex)
+  });
+}
 
+
+// function displayMatches() {
+//   const matchArray = findMatches(this.value, locations);
+// }
+
+
+// const searchInput = document.querySelector('.search');
+// const suggestions = document.querySelector('.suggestions');
+
+// searchInput.addEventListener('change', displayMatches);
+// searchInput.addEventListener('keyup', displayMatches);
 
 </script>
 </body>
